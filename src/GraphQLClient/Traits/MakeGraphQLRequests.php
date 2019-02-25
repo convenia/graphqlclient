@@ -20,16 +20,16 @@ trait MakeGraphQLRequests
 
     protected function graphqlMutate(string $name, array $params, array $fields): array
     {
-        $this->makeRequest($name, $params, $fields);
+        $this->makeRequest($name, $params, $fields)
 
        	return $this->graphql->mutate($this->query)->getData();
     }
 
     protected function graphqlQuery(string $name, array $params, array $fields): array
     {
-        $this->makeRequest($name, $params, $fields);
+        $this->makeRequest($name, $params, $fields)
 
-        return $this->graphql->query($this->query)->getData();
+        return $this->graphql->mutate($this->query)->getData();
     }
 
     private function makeRequest(string $name, array $params, array $fields) {
