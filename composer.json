@@ -1,5 +1,5 @@
 {
-    "name": "convenia/graphql-client",
+    "name": "convenia/graphqlclient",
     "description": "Pacote para realizar chamadas HTTP para GraphQL utilizando OO",
     "license": "proprietary",
     "type": "library",

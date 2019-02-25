@@ -16,7 +16,7 @@ Para instalar adicione o seguinte código em seu ```composer.json```
     "repositories": [
         {
             "type": "git",
-            "url": "git@bitbucket.org:convenia/rh/libs/graphqlclient.git",
+            "url": "git@gitlab.com:convenia/rh/libs/graphqlclient.git",
             "no-api": true
         }
     ]
