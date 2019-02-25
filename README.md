@@ -48,7 +48,7 @@ class TestMyGraphQL extends TestCase
     $query = ['field_1','field_2', 'field_3'];
 
     // Campos retornados pela query
-    $fields = $this->graphqlCall('mutationName', $params, $query);
+    $fields = $this->graphqlMutate('mutationName', $params, $query);
 
     //  Verifica se todos os campos solicitados foram retornados
     $this->assertGraphQLFields($fields);
@@ -73,7 +73,7 @@ class TestMyGraphQL extends TestCase
     ];
 
     // Campos retornados pela query
-    $fields = $this->graphqlCall('queryName', $params, $query);
+    $fields = $this->graphqlQuery('queryName', $params, $query);
 
     //  Verifica se todos os campos solicitados foram retornados
     $this->assertGraphQLFields($fields);

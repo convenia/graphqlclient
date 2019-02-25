@@ -18,20 +18,31 @@ trait MakeGraphQLRequests
 
     private $query;
 
-    protected function graphqlCall(string $name, array $params, array $fields): array
+    protected function graphqlMutate(string $name, array $params, array $fields): array
     {
-       	$this->graphql = new \Convenia\GraphQLClient\LaravelTestGraphQLClient(
-        	$this->app,
-           	$this->endpoint
-       	);
-
-       	$params = $params;
-
-		    $fields = $this->mapFields($fields);
-
-       	$this->query = new Query($name, $params, $fields);
+        $this->makeRequest($name, $params, $fields);
 
        	return $this->graphql->mutate($this->query)->getData();
+    }
+
+    protected function graphqlQuery(string $name, array $params, array $fields): array
+    {
+        $this->makeRequest($name, $params, $fields);
+
+        return $this->graphql->query($this->query)->getData();
+    }
+
+    private function makeRequest(string $name, array $params, array $fields) {
+        $this->graphql = new \Convenia\GraphQLClient\LaravelTestGraphQLClient(
+          $this->app,
+            $this->endpoint
+        );
+
+        $params = $params;
+
+        $fields = $this->mapFields($fields);
+
+        $this->query = new Query($name, $params, $fields);
     }
 
     protected function assertGraphQLFields($fields)
