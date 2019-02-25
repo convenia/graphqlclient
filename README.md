@@ -25,3 +25,58 @@ Para instalar adicione o seguinte código em seu ```composer.json```
 ```
 
 Depois execute ```composer update```
+
+## Utilização
+
+```php
+use Convenia\GraphQLClient\Traits\MakeGraphQLRequests;
+
+class TestMyGraphQL extends TestCase
+{
+    use MakeGraphQLRequests;
+
+  /** @var Endpoint */
+  protected $endpoint = '/your_graphql_endpoint' //Default '/graphql';
+  
+  public function test_my_first_mutation_endpoint() {
+    // Parametros para mutação
+    $params = [
+        'field' => 'My first endpoint test',
+    ];
+
+    // Campos para serem retornados
+    $query = ['field_1','field_2', 'field_3'];
+
+    // Campos retornados pela query
+    $fields = $this->graphqlCall('mutationName', $params, $query);
+
+    //  Verifica se todos os campos solicitados foram retornados
+    $this->assertGraphQLFields($fields);
+  }
+
+  public function test_my_sub_queries_endpoint() {
+    // Os parâmetros para a query principal
+    $queryParams = [];
+
+    // Campos para serem retornados
+    $query = [
+        'field_1',
+        'field_2',
+        'subQueryName' => [
+            'params' => [
+                'sub_query_param' => 'value'
+            ],
+            'sub_field_1',
+            'sub_field_2',
+            'sub_field_3',
+        ]
+    ];
+
+    // Campos retornados pela query
+    $fields = $this->graphqlCall('queryName', $params, $query);
+
+    //  Verifica se todos os campos solicitados foram retornados
+    $this->assertGraphQLFields($fields);
+  }
+}
+```
