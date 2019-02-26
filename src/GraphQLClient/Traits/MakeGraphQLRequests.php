@@ -52,7 +52,7 @@ trait MakeGraphQLRequests
     {
         $this->makeRequest($name, $params, $fields);
 
-        return $this->graphql->mutate($this->query)->getData();
+        return $this->graphql->query($this->query)->getData();
     }
 
     /**
