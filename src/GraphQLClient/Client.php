@@ -107,7 +107,7 @@ abstract class Client
         }
 
         $paramString = '';
-        if ($query instanceof Query) {
+        if ($query instanceof Query && count($query->getParams())) {
             $paramString = '(' . $this->getParamString($query->getParams()) . ')';
         }
         $queryString = sprintf('%s%s %s', $query->getName(), $paramString, $fieldString);
