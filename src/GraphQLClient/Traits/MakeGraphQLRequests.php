@@ -6,32 +6,60 @@ use \Convenia\GraphQLClient\Field;
 use \Convenia\GraphQLClient\Query;
 
 /**
- * Sumary
- * @method aray graphqlMutationCall(string name, array params, array fields) Make a GraphQL mutation call
- * @method null assertGraphQLFields(array fields) Check if the response contains all desired fields
+ * Trait MakeGraphQLRequests
+ *
+ * @package Convenia\GraphQLClient\Traits
  */
 trait MakeGraphQLRequests
 {
+    /**
+     * @var string $endpoint
+     */
 	protected $endpoint = '/graphql';
 
+    /**
+     * @var Client $graphql
+     */
 	protected $graphql;
 
+    /**
+     * @var Query $query
+     */
     private $query;
 
+    /**
+     * @param string $name
+     * @param array  $params
+     * @param array  $fields
+     *
+     * @return array
+     */
     protected function graphqlMutate(string $name, array $params, array $fields): array
     {
-        $this->makeRequest($name, $params, $fields)
+        $this->makeRequest($name, $params, $fields);
 
        	return $this->graphql->mutate($this->query)->getData();
     }
 
+    /**
+     * @param string $name
+     * @param array  $params
+     * @param array  $fields
+     *
+     * @return array
+     */
     protected function graphqlQuery(string $name, array $params, array $fields): array
     {
-        $this->makeRequest($name, $params, $fields)
+        $this->makeRequest($name, $params, $fields);
 
         return $this->graphql->mutate($this->query)->getData();
     }
 
+    /**
+     * @param string $name
+     * @param array  $params
+     * @param array  $fields
+     */
     private function makeRequest(string $name, array $params, array $fields) {
         $this->graphql = new \Convenia\GraphQLClient\LaravelTestGraphQLClient(
           $this->app,
@@ -45,15 +73,30 @@ trait MakeGraphQLRequests
         $this->query = new Query($name, $params, $fields);
     }
 
+    /**
+     * @param $fields
+     */
     protected function assertGraphQLFields($fields)
     {
         $this->graphql->assertGraphQLFields($fields, $this->query);
     }
 
+    /**
+     * @param $name
+     * @param $params
+     * @param $fields
+     *
+     * @return \Convenia\GraphQLClient\Query
+     */
     protected function createQuery($name, $params, $fields): Query {
     	return new Query($name, $params, $this->mapFields($fields));
     }
 
+    /**
+     * @param array $fields
+     *
+     * @return array
+     */
     private function mapFields(array $fields): array {
     	$f = [];
 
