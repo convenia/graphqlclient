@@ -106,8 +106,9 @@ trait MakeGraphQLRequests
     			$params = $value['params'];
     			unset($value['params']);
        	 		$f[] = $this->createQuery($key, $params, $value);
+       	 		continue;
     	 	}
-    	 	$f[] = new Field($value);
+            $f[] = new Field($value);
     	}
 
     	return $f;
