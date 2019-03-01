@@ -34,7 +34,7 @@ trait MakeGraphQLRequests
      *
      * @return array
      */
-    protected function graphqlMutate(string $name, array $params, array $fields): array
+    protected function graphqlMutate(string $name, array $params, array $fields)
     {
         $this->makeRequest($name, $params, $fields);
 
