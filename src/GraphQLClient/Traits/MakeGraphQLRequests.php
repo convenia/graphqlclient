@@ -18,7 +18,7 @@ trait MakeGraphQLRequests
 	protected $endpoint = '/graphql';
 
     /**
-     * @var Client $graphql
+     * @var \Convenia\GraphQLClient\Client $graphql
      */
 	protected $graphql;
 
@@ -32,7 +32,7 @@ trait MakeGraphQLRequests
      * @param array  $params
      * @param array  $fields
      *
-     * @return array
+     * @return mixed
      */
     protected function graphqlMutate(string $name, array $params, array $fields)
     {
@@ -46,9 +46,9 @@ trait MakeGraphQLRequests
      * @param array  $params
      * @param array  $fields
      *
-     * @return array
+     * @return mixed
      */
-    protected function graphqlQuery(string $name, array $params, array $fields): array
+    protected function graphqlQuery(string $name, array $params, array $fields)
     {
         $this->makeRequest($name, $params, $fields);
 
